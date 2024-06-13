@@ -31,9 +31,7 @@ class MainTabBarViewController: UITabBarController {
         vc4.title = "Downlouds"
         
         tabBar.tintColor = .label
-        
     }
-
 
 }
 
