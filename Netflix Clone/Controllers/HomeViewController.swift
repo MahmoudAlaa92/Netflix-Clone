@@ -20,7 +20,10 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         view.addSubview(homeFeedTable)
-        homeFeedTable.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 435))
+        let headeView = HomeHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 435))
+        
+        homeFeedTable.tableHeaderView = headeView
+        
         
         homeFeedTable.delegate = self
         homeFeedTable.dataSource = self
