@@ -9,6 +9,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    let titleSection: [String] = ["Trending Movies" ,"Popular" ,"Trending TV" ,"Up Movies" ,"Top Rated"]
+    
     private let homeFeedTable: UITableView = {
         let table = UITableView(frame: .zero,style: .grouped)
         table.register(CollectionViewTableViewCell.self, forCellReuseIdentifier: CollectionViewTableViewCell.identifier)
@@ -58,7 +60,6 @@ class HomeViewController: UIViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let safeArea = view.safeAreaInsets.top
         let offset = scrollView.contentOffset.y + safeArea
-        print(offset)
         navigationController?.navigationBar.transform = .init(translationX: 0, y: -offset)
     }
 }
@@ -66,10 +67,21 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDelegate ,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 20
+        return titleSection.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return titleSection[section]
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else {return}
+        header.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        header.textLabel?.frame = CGRect(x: header.bounds.origin.x+20, y: header.bounds.origin.y, width: 100, height: header.bounds.height)
+        header.textLabel?.textColor = .white
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
