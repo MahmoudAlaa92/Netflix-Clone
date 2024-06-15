@@ -12,7 +12,7 @@ class HomeHeaderUIView: UIView {
     private let HeaderImage: UIImageView = {
        let image = UIImageView()
         image.contentMode = .scaleAspectFill
-        image.image = UIImage(named: "HomeHeaderImage2")
+        image.image = UIImage(named: "HomeHeaderImage")
         image.clipsToBounds = true
         return image
     }()
@@ -65,14 +65,14 @@ class HomeHeaderUIView: UIView {
         let playButtonConstrian = [
         playButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 95),
         playButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
-        playButton.widthAnchor.constraint(equalToConstant: frame.width/4.5),
+        playButton.widthAnchor.constraint(equalToConstant: frame.width/4.5+10),
         playButton.heightAnchor.constraint(equalToConstant: 30)
         ]
         
         let downloudbuttonConstrian = [
             downloudButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -95),
             downloudButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
-            downloudButton.widthAnchor.constraint(equalToConstant: frame.width/4.5),
+            downloudButton.widthAnchor.constraint(equalToConstant: frame.width/4.5+10),
             downloudButton.heightAnchor.constraint(equalToConstant: 30)
         
         ]
