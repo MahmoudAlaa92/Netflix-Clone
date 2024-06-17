@@ -9,7 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    let titleSection: [String] = ["Trending Movies" ,"Popular" ,"Trending TV" ,"Up Movies" ,"Top Rated"]
+    let titleSection: [String] = ["Trending Movies" ,"Trending TV" ,"Popular" ,"Up Movies" ,"Top Rated"]
     
     private let homeFeedTable: UITableView = {
         let table = UITableView(frame: .zero,style: .grouped)
@@ -29,7 +29,7 @@ class HomeViewController: UIViewController {
         
         let headeView = HomeHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 435))
         homeFeedTable.tableHeaderView = headeView
-        getTrendingMovies()
+        fetchData()
     }
     
     func configerNavbar(){
@@ -62,14 +62,21 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.transform = .init(translationX: 0, y: -offset)
     }
     
-    func getTrendingMovies (){
-        CallApi.shared.getTrendingMovies { results  in
-            switch results {
-            case .success(let movies):
-                print(movies)
-            case .failure(let error):
-                print(error)
-            }
+    func fetchData (){
+//        CallApi.shared.getTrendingMovies { results  in
+//            switch results {
+//            case .success(let movies):
+//                print(movies)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+        
+//        CallApi.shared.getTrendingTv { result in
+//            
+//        }
+        CallApi.shared.getPopular{ results in
+            
         }
     }
 }
