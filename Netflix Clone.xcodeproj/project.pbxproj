@@ -22,6 +22,8 @@
 		1591E1F82C1A6901008259DB /* UpcomingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1591E1F72C1A6901008259DB /* UpcomingViewController.swift */; };
 		1591E1FA2C1A692D008259DB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1591E1F92C1A692D008259DB /* SearchViewController.swift */; };
 		1591E1FC2C1A6946008259DB /* DownloudsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1591E1FB2C1A6946008259DB /* DownloudsViewController.swift */; };
+		15AD23DD2C1FB1800043C11C /* CallApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AD23DC2C1FB1800043C11C /* CallApi.swift */; };
+		15AD23DF2C1FC6AD0043C11C /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AD23DE2C1FC6AD0043C11C /* Movie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		1591E1F72C1A6901008259DB /* UpcomingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingViewController.swift; sourceTree = "<group>"; };
 		1591E1F92C1A692D008259DB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		1591E1FB2C1A6946008259DB /* DownloudsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloudsViewController.swift; sourceTree = "<group>"; };
+		15AD23DC2C1FB1800043C11C /* CallApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallApi.swift; sourceTree = "<group>"; };
+		15AD23DE2C1FC6AD0043C11C /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,7 @@
 		1515F8B82C1B7A8E002AC85D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				15AD23DE2C1FC6AD0043C11C /* Movie.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -112,6 +117,7 @@
 		1515F8BC2C1B7B3B002AC85D /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				15AD23DC2C1FB1800043C11C /* CallApi.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -325,9 +331,11 @@
 			files = (
 				1515F8C12C1BBC0B002AC85D /* HomeHeaderUIView.swift in Sources */,
 				1591E1F82C1A6901008259DB /* UpcomingViewController.swift in Sources */,
+				15AD23DF2C1FC6AD0043C11C /* Movie.swift in Sources */,
 				1591E1FA2C1A692D008259DB /* SearchViewController.swift in Sources */,
 				1591E1FC2C1A6946008259DB /* DownloudsViewController.swift in Sources */,
 				1591E1F62C1A68E7008259DB /* HomeViewController.swift in Sources */,
+				15AD23DD2C1FB1800043C11C /* CallApi.swift in Sources */,
 				1544A7C92C1A332600C399A5 /* Netflix_Clone.xcdatamodeld in Sources */,
 				1515F8BF2C1B7CC9002AC85D /* CollectionViewTableViewCell.swift in Sources */,
 				1544A7C32C1A332600C399A5 /* MainTabBarViewController.swift in Sources */,

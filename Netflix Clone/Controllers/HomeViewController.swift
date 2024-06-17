@@ -29,15 +29,14 @@ class HomeViewController: UIViewController {
         
         let headeView = HomeHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 435))
         homeFeedTable.tableHeaderView = headeView
+        getTrendingMovies()
     }
     
     func configerNavbar(){
         
         var image = UIImage(named: "netflixLogo")
         
-
         image = image?.withRenderingMode(.alwaysOriginal)
-        
         
         let leftBarButton = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
         let leftDisplacement = (view.bounds.width / 5) - 30
@@ -61,6 +60,17 @@ class HomeViewController: UIViewController {
         let safeArea = view.safeAreaInsets.top
         let offset = scrollView.contentOffset.y + safeArea
         navigationController?.navigationBar.transform = .init(translationX: 0, y: -offset)
+    }
+    
+    func getTrendingMovies (){
+        CallApi.shared.getTrendingMovies { results  in
+            switch results {
+            case .success(let movies):
+                print(movies)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 
