@@ -18,6 +18,7 @@
 		1544A7D92C1A332800C399A5 /* Netflix_CloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1544A7D82C1A332800C399A5 /* Netflix_CloneTests.swift */; };
 		1544A7E32C1A332800C399A5 /* Netflix_CloneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1544A7E22C1A332800C399A5 /* Netflix_CloneUITests.swift */; };
 		1544A7E52C1A332800C399A5 /* Netflix_CloneUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1544A7E42C1A332800C399A5 /* Netflix_CloneUITestsLaunchTests.swift */; };
+		1555F2972C20D2C500C4131D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1555F2962C20D2C500C4131D /* Extensions.swift */; };
 		1591E1F62C1A68E7008259DB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1591E1F52C1A68E7008259DB /* HomeViewController.swift */; };
 		1591E1F82C1A6901008259DB /* UpcomingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1591E1F72C1A6901008259DB /* UpcomingViewController.swift */; };
 		1591E1FA2C1A692D008259DB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1591E1F92C1A692D008259DB /* SearchViewController.swift */; };
@@ -59,6 +60,7 @@
 		1544A7DE2C1A332800C399A5 /* Netflix CloneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Netflix CloneUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1544A7E22C1A332800C399A5 /* Netflix_CloneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Netflix_CloneUITests.swift; sourceTree = "<group>"; };
 		1544A7E42C1A332800C399A5 /* Netflix_CloneUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Netflix_CloneUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1555F2962C20D2C500C4131D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1591E1F52C1A68E7008259DB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1591E1F72C1A6901008259DB /* UpcomingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingViewController.swift; sourceTree = "<group>"; };
 		1591E1F92C1A692D008259DB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -107,13 +109,6 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		1515F8BB2C1B7AE2002AC85D /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		1515F8BC2C1B7B3B002AC85D /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,7 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				1515F8BC2C1B7B3B002AC85D /* Managers */,
-				1515F8BB2C1B7AE2002AC85D /* Resources */,
+				1555F2952C20D29700C4131D /* Resources */,
 				1515F8B82C1B7A8E002AC85D /* Models */,
 				1515F8BA2C1B7AAA002AC85D /* ViewModels */,
 				1515F8BD2C1B7B51002AC85D /* Views */,
@@ -186,6 +181,14 @@
 				1544A7E42C1A332800C399A5 /* Netflix_CloneUITestsLaunchTests.swift */,
 			);
 			path = "Netflix CloneUITests";
+			sourceTree = "<group>";
+		};
+		1555F2952C20D29700C4131D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1555F2962C20D2C500C4131D /* Extensions.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		1591E1F42C1A68AA008259DB /* Controllers */ = {
@@ -337,6 +340,7 @@
 				1591E1F62C1A68E7008259DB /* HomeViewController.swift in Sources */,
 				15AD23DD2C1FB1800043C11C /* CallApi.swift in Sources */,
 				1544A7C92C1A332600C399A5 /* Netflix_Clone.xcdatamodeld in Sources */,
+				1555F2972C20D2C500C4131D /* Extensions.swift in Sources */,
 				1515F8BF2C1B7CC9002AC85D /* CollectionViewTableViewCell.swift in Sources */,
 				1544A7C32C1A332600C399A5 /* MainTabBarViewController.swift in Sources */,
 				1544A7BF2C1A332600C399A5 /* AppDelegate.swift in Sources */,

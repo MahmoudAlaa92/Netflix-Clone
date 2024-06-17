@@ -92,6 +92,7 @@ extension HomeViewController: UITableViewDelegate ,UITableViewDataSource{
         header.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         header.textLabel?.frame = CGRect(x: header.bounds.origin.x+20, y: header.bounds.origin.y, width: 100, height: header.bounds.height)
         header.textLabel?.textColor = .white
+        header.textLabel?.text = header.textLabel?.text?.capitalizeFirstLetter()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
