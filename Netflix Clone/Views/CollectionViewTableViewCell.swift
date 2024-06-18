@@ -10,6 +10,7 @@ import UIKit
 class CollectionViewTableViewCell: UITableViewCell {
 
     static let identifier = "CollectionViewTableViewCell"
+    private var titles: [Titles] = [Titles]()
     
     private let collectionView: UICollectionView = {
         
@@ -18,7 +19,7 @@ class CollectionViewTableViewCell: UITableViewCell {
         layout.scrollDirection = .horizontal
         
         let collectionView = UICollectionView(frame: .zero ,collectionViewLayout: layout)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: TitleCollectionViewCell.identifier)
         
         return collectionView
     }()
@@ -41,18 +42,32 @@ class CollectionViewTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+   public func itemsOfTitles(with titles: [Titles]){
+       self.titles = titles
+       DispatchQueue.main.async{
+           self.collectionView.reloadData()
+       }
+    }
 }
-
 
 extension CollectionViewTableViewCell: UICollectionViewDataSource ,UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for:indexPath)
-        cell.backgroundColor = .green
+       // green squere
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TitleCollectionViewCell.identifier, for: indexPath) as? TitleCollectionViewCell else{
+            print("problem when convert to titleCollectionViewCell")
+            return UICollectionViewCell()
+        }
+        
+        guard let model = titles[indexPath.row].poster_path else{
+            print("problem when put a value in model ")
+            return cell
+        }
+        cell.itemsOfTitles(with: model)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+        return titles.count
     }
         
 }

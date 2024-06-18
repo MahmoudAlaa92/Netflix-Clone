@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeHeaderUIView: UIView {
+class HeaderUIView: UIView {
  
     private let HeaderImage: UIImageView = {
        let image = UIImageView()

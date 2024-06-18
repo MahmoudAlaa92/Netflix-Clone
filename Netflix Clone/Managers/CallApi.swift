@@ -18,7 +18,7 @@ enum APIError: Error{
 
 class CallApi{
     static let shared = CallApi()
-    func getTrendingMovies(closure: @escaping(Result<[Movie] ,Error>) -> Void){
+    func getTrendingMovies(completion: @escaping(Result<[Titles] ,Error>) -> Void){
         
         let urlString = "\(Constant.url)3/trending/movie/day?api_key=\(Constant.apiKey)"
         guard let url = URL(string: urlString) else {
@@ -33,16 +33,16 @@ class CallApi{
 //            closure(data)
             
             do{
-                let result =  try JSONDecoder().decode(TrendingMovies.self ,from: data)
-                closure(.success(result.results))
+                let result =  try JSONDecoder().decode(TrendingTitles.self ,from: data)
+                completion(.success(result.results))
             }catch{
-                closure(.failure(error))
+                completion(.failure(APIError.faildToGetData))
             }
         }
         task.resume()
     }
     
-    func getTrendingTv(completion:@escaping (Result<[Tv],Error>) -> Void){
+    func getTrendingTv(completion: @escaping(Result<[Titles],Error>) -> Void){
         let urlString = "\(Constant.url)3/trending/tv/day?api_key=\(Constant.apiKey)"
        
         guard let url = URL(string: urlString) else{
@@ -56,16 +56,16 @@ class CallApi{
                 return
             }
             do{
-                let result = try JSONDecoder().decode(TrendingTv.self, from: data)
-               print(result)
+                let result = try JSONDecoder().decode(TrendingTitles.self, from: data)
+                completion(.success(result.results))
             }catch{
-                print("Error: \(error)")
+                completion(.failure(APIError.faildToGetData))
             }
         }
         task.resume()
     }
     
-    func upComingMovies (completion: @escaping (Result<[Movie],Error>)->Void ){
+    func upComingMovies (completion: @escaping (Result<[Titles],Error>)->Void ){
         let urlString = "\(Constant.url)/3/movie/upcoming?api_key=\(Constant.apiKey)&language=en-US&page=1"
         guard let url = URL(string: urlString) else{
             print("Ivalid URL")
@@ -78,16 +78,16 @@ class CallApi{
                 return
             }
             do{
-                let result = try JSONDecoder().decode(TrendingMovies.self, from: data)
-                print(result)
+                let result = try JSONDecoder().decode(TrendingTitles.self, from: data)
+                completion(.success(result.results))
             }catch{
-                print("Errror: \(error)")
+                completion(.failure(APIError.faildToGetData))
             }
         }
         task.resume()
     }
     
-    func getPopular (completion: @escaping (Result<[Movie],Error>)->Void ){
+    func getPopular (completion: @escaping (Result<[Titles],Error>)->Void ){
         let urlString = "\(Constant.url)/3/movie/popular?api_key=\(Constant.apiKey)&language=en-US&page=1"
         guard let url = URL(string: urlString) else{
             print("Ivalid URL")
@@ -100,16 +100,16 @@ class CallApi{
                 return
             }
             do{
-                let result = try JSONDecoder().decode(TrendingMovies.self, from: data)
-                print(result)
+                let result = try JSONDecoder().decode(TrendingTitles.self, from: data)
+                completion(.success(result.results))
             }catch{
-                print("Errror: \(error)")
+                completion(.failure(APIError.faildToGetData))
             }
         }
         task.resume()
     }
     
-    func getTopRated(completion: @escaping (Result<[Movie],Error>)->Void ){
+    func getTopRated(completion: @escaping (Result<[Titles],Error>)->Void ){
         let urlString = "\(Constant.url)/3/movie/top_rated?api_key=\(Constant.apiKey)&language=en-US&page=1"
         guard let url = URL(string: urlString) else{
             print("Ivalid URL")
@@ -122,10 +122,10 @@ class CallApi{
                 return
             }
             do{
-                let result = try JSONDecoder().decode(TrendingMovies.self, from: data)
-                print(result)
+                let result = try JSONDecoder().decode(TrendingTitles.self, from: data)
+                completion(.success(result.results))
             }catch{
-                print("Errror: \(error)")
+                completion(.failure(APIError.faildToGetData))
             }
         }
         task.resume()
