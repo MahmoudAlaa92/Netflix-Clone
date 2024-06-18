@@ -7,6 +7,14 @@
 
 import UIKit
 
+enum Section: Int{
+    case TrendingMovies = 0
+    case TrendingTv = 1
+    case Popular = 2
+    case UpMovies = 3
+    case TopRated = 4
+}
+
 class HomeViewController: UIViewController {
     
     let titleSection: [String] = ["Trending Movies" ,"Trending TV" ,"Popular" ,"Up Movies" ,"Top Rated"]
@@ -14,6 +22,7 @@ class HomeViewController: UIViewController {
     private let homeFeedTable: UITableView = {
         let table = UITableView(frame: .zero,style: .grouped)
         table.register(CollectionViewTableViewCell.self, forCellReuseIdentifier: CollectionViewTableViewCell.identifier)
+        
         return table
     }()
     
@@ -27,16 +36,15 @@ class HomeViewController: UIViewController {
         
         configerNavbar()
         
-        let headeView = HomeHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 435))
+        let headeView = HeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 435))
         homeFeedTable.tableHeaderView = headeView
-        fetchData()
     }
     
     func configerNavbar(){
         
         var image = UIImage(named: "netflixLogo")
         
-        image = image?.withRenderingMode(.alwaysOriginal)
+        image = image?.withRenderingMode (.alwaysOriginal)
         
         let leftBarButton = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
         let leftDisplacement = (view.bounds.width / 5) - 30
@@ -62,23 +70,7 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.transform = .init(translationX: 0, y: -offset)
     }
     
-    func fetchData (){
-//        CallApi.shared.getTrendingMovies { results  in
-//            switch results {
-//            case .success(let movies):
-//                print(movies)
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-        
-//        CallApi.shared.getTrendingTv { result in
-//            
-//        }
-        CallApi.shared.getPopular{ results in
-            
-        }
-    }
+    
 }
 
 extension HomeViewController: UITableViewDelegate ,UITableViewDataSource{
@@ -104,7 +96,58 @@ extension HomeViewController: UITableViewDelegate ,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as?  CollectionViewTableViewCell else{
+            print("error when convert to collectionTableViewCell")
             return UITableViewCell()
+        }
+        
+        switch indexPath.section{
+            case Section.TrendingMovies.rawValue:
+            CallApi.shared.getTrendingMovies { result in
+                switch result{
+                    case .success(let title):
+                        cell.itemsOfTitles(with: title)
+                    case .failure(let error):
+                        print(error)
+                }
+            }
+        case Section.TrendingTv.rawValue:
+            CallApi.shared.getTrendingTv { result in
+                switch result{
+                    case .success(let title):
+                        cell.itemsOfTitles(with: title)
+                    case .failure(let error):
+                        print(error)
+                }
+            }
+        case Section.Popular.rawValue:
+            CallApi.shared.getPopular { result in
+                switch result{
+                    case .success(let title):
+                        cell.itemsOfTitles(with: title)
+                    case .failure(let error):
+                        print(error)
+                }
+            }
+        case Section.UpMovies.rawValue:
+            CallApi.shared.upComingMovies { result in
+                switch result{
+                    case .success(let title):
+                        cell.itemsOfTitles(with: title)
+                    case .failure(let error):
+                        print(error)
+                }
+            }
+        case Section.TopRated.rawValue:
+            CallApi.shared.getTopRated { result in
+                switch result{
+                    case .success(let title):
+                        cell.itemsOfTitles(with: title)
+                    case .failure(let error):
+                        print(error)
+                }
+            }
+        default:
+            return cell
         }
         return cell
     }
