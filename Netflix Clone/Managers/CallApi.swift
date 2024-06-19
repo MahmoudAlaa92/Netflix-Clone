@@ -130,4 +130,26 @@ class CallApi{
         }
         task.resume()
     }
+    
+    func getSearch(completion: @escaping (Result<[Titles],Error>)->Void ){
+        let urlString = "\(Constant.url)/3/movie/upcoming?api_key=\(Constant.apiKey)&language=en-US&page=1"
+        guard let url = URL(string: urlString) else{
+            print("Invalid URL")
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
+            guard error == nil ,let data = data else{
+                print("Error: \(error!.localizedDescription)")
+                return
+            }
+            do{
+                let result = try JSONDecoder().decode(TrendingTitles.self, from: data)
+                completion(.success(result.results))
+            }catch{
+                completion(.failure(APIError.faildToGetData))
+            }
+        }
+        task.resume()
+    }
 }
