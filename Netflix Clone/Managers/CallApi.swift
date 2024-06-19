@@ -68,7 +68,7 @@ class CallApi{
     func upComingMovies (completion: @escaping (Result<[Titles],Error>)->Void ){
         let urlString = "\(Constant.url)/3/movie/upcoming?api_key=\(Constant.apiKey)&language=en-US&page=1"
         guard let url = URL(string: urlString) else{
-            print("Ivalid URL")
+            print("Invalid URL")
             return
         }
         
@@ -90,7 +90,7 @@ class CallApi{
     func getPopular (completion: @escaping (Result<[Titles],Error>)->Void ){
         let urlString = "\(Constant.url)/3/movie/popular?api_key=\(Constant.apiKey)&language=en-US&page=1"
         guard let url = URL(string: urlString) else{
-            print("Ivalid URL")
+            print("Invalid URL")
             return
         }
         
@@ -112,7 +112,7 @@ class CallApi{
     func getTopRated(completion: @escaping (Result<[Titles],Error>)->Void ){
         let urlString = "\(Constant.url)/3/movie/top_rated?api_key=\(Constant.apiKey)&language=en-US&page=1"
         guard let url = URL(string: urlString) else{
-            print("Ivalid URL")
+            print("Invalid URL")
             return
         }
         

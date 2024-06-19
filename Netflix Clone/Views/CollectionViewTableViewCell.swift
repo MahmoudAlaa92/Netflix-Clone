@@ -44,8 +44,8 @@ class CollectionViewTableViewCell: UITableViewCell {
     
    public func itemsOfTitles(with titles: [Titles]){
        self.titles = titles
-       DispatchQueue.main.async{
-           self.collectionView.reloadData()
+       DispatchQueue.main.async{ [weak self] in
+           self?.collectionView.reloadData()
        }
     }
 }
@@ -54,12 +54,12 @@ extension CollectionViewTableViewCell: UICollectionViewDataSource ,UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
        // green squere
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TitleCollectionViewCell.identifier, for: indexPath) as? TitleCollectionViewCell else{
-            print("problem when convert to titleCollectionViewCell")
+            print("Error when convert to titleCollectionViewCell")
             return UICollectionViewCell()
         }
         
         guard let model = titles[indexPath.row].poster_path else{
-            print("problem when put a value in model ")
+            print("Error when put a value in model ")
             return cell
         }
         cell.itemsOfTitles(with: model)
