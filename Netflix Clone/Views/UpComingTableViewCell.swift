@@ -26,10 +26,20 @@ class UpComingTableViewCell: UITableViewCell {
         return label
     }()
    
+    private let playButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(systemName: "play.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = .white
+        return button
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(posterImage)
         contentView.addSubview(labelView)
+        contentView.addSubview(playButton)
         applyConstrain()
     }
     
@@ -50,8 +60,16 @@ class UpComingTableViewCell: UITableViewCell {
             labelView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ]
         
+        
+         let playButtonConstraints = [
+            playButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            playButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            playButton.widthAnchor.constraint(equalToConstant: 40)
+         ]
+         
         NSLayoutConstraint.activate(posterImageConstrain)
         NSLayoutConstraint.activate(labelViewConstrain)
+        NSLayoutConstraint.activate(playButtonConstraints)
     }
     
     public func itemsOfUpcoming (with model: TitleViewCell){

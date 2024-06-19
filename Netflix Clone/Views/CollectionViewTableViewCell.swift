@@ -69,5 +69,4 @@ extension CollectionViewTableViewCell: UICollectionViewDataSource ,UICollectionV
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return titles.count
     }
-        
 }
