@@ -32,6 +32,11 @@ class TitleCollectionViewCell: UICollectionViewCell {
     }
     
     public func itemsOfTitles(with model: String){
-        print(model)
+        
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(model)") else{
+            print("Error when convert model to url")
+            return  
+        }
+        posterImageView.sd_setImage(with: url)
     }
 }

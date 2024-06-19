@@ -28,6 +28,8 @@
 		1591E1FC2C1A6946008259DB /* DownloudsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1591E1FB2C1A6946008259DB /* DownloudsViewController.swift */; };
 		15AD23DD2C1FB1800043C11C /* CallApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AD23DC2C1FB1800043C11C /* CallApi.swift */; };
 		15AD23DF2C1FC6AD0043C11C /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AD23DE2C1FC6AD0043C11C /* Title.swift */; };
+		15BB14452C22530B00DDC48C /* UpComingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BB14442C22530B00DDC48C /* UpComingTableViewCell.swift */; };
+		15BB14492C2258AD00DDC48C /* TitleViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BB14482C2258AD00DDC48C /* TitleViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		1591E1FB2C1A6946008259DB /* DownloudsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloudsViewController.swift; sourceTree = "<group>"; };
 		15AD23DC2C1FB1800043C11C /* CallApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallApi.swift; sourceTree = "<group>"; };
 		15AD23DE2C1FC6AD0043C11C /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
+		15BB14442C22530B00DDC48C /* UpComingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpComingTableViewCell.swift; sourceTree = "<group>"; };
+		15BB14482C2258AD00DDC48C /* TitleViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +115,7 @@
 		1515F8BA2C1B7AAA002AC85D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				15BB14482C2258AD00DDC48C /* TitleViewCell.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 				1515F8BE2C1B7CC9002AC85D /* CollectionViewTableViewCell.swift */,
 				1515F8C02C1BBC0B002AC85D /* HeaderUIView.swift */,
 				1555F29A2C2102A800C4131D /* TitleCollectionViewCell.swift */,
+				15BB14442C22530B00DDC48C /* UpComingTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -352,10 +358,12 @@
 				1591E1FA2C1A692D008259DB /* SearchViewController.swift in Sources */,
 				1591E1FC2C1A6946008259DB /* DownloudsViewController.swift in Sources */,
 				1591E1F62C1A68E7008259DB /* HomeViewController.swift in Sources */,
+				15BB14452C22530B00DDC48C /* UpComingTableViewCell.swift in Sources */,
 				15AD23DD2C1FB1800043C11C /* CallApi.swift in Sources */,
 				1555F29B2C2102A800C4131D /* TitleCollectionViewCell.swift in Sources */,
 				1544A7C92C1A332600C399A5 /* Netflix_Clone.xcdatamodeld in Sources */,
 				1555F2972C20D2C500C4131D /* Extensions.swift in Sources */,
+				15BB14492C2258AD00DDC48C /* TitleViewCell.swift in Sources */,
 				1515F8BF2C1B7CC9002AC85D /* CollectionViewTableViewCell.swift in Sources */,
 				1544A7C32C1A332600C399A5 /* MainTabBarViewController.swift in Sources */,
 				1544A7BF2C1A332600C399A5 /* AppDelegate.swift in Sources */,
