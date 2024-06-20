@@ -17,6 +17,12 @@ class SearchViewController: UIViewController {
         return table
     }()
     
+    private let searchResultController: UISearchController = {
+        let controller = UISearchController(searchResultsController: SearchResultViewController())
+        controller.searchBar.placeholder = "Search for Movies"
+        controller.searchBar.searchBarStyle = .minimal
+        return controller
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +30,8 @@ class SearchViewController: UIViewController {
         title = "Search"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.tintColor = .white
+        navigationItem.searchController = searchResultController
         
         view.addSubview(searchTableView)
         searchTableView.delegate = self
