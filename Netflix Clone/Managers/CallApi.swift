@@ -9,7 +9,9 @@ import Foundation
 
 struct Constants {
     static let apiKey = "697d439ac993538da4e3e60b54e762cd"
+    static let youtubeAPI = "AIzaSyAeO6IK48eH45D3cs1-7JgqCtnH2stPjP8"
     static let url = "https://api.themoviedb.org/"
+    static let youtubeUrl = "https://youtube.googleapis.com"
 }
 
 enum APIError: Error{
@@ -30,7 +32,7 @@ class CallApi{
                 print("Error: \(error!.localizedDescription)")
                 return
             }
-//            closure(data)
+            //            closure(data)
             
             do{
                 let result =  try JSONDecoder().decode(TrendingTitles.self ,from: data)
@@ -44,12 +46,12 @@ class CallApi{
     
     func getTrendingTv(completion: @escaping(Result<[Titles],Error>) -> Void){
         let urlString = "\(Constants.url)3/trending/tv/day?api_key=\(Constants.apiKey)"
-       
+        
         guard let url = URL(string: urlString) else{
             print("Invalid URL")
             return
         }
-     
+        
         let task = URLSession.shared.dataTask(with: url) { Data, _, error in
             guard  error == nil ,let data = Data else{
                 print("Error: \(error!.localizedDescription)")
@@ -170,6 +172,23 @@ class CallApi{
                 completion(.success(result.results))
             }catch{
                 completion(.failure(APIError.faildToGetData))
+            }
+        }
+        task.resume()
+    }
+    
+    func getMovies(query: String ,completion: @escaping (Result<SearchResult ,Error>)->Void ){
+        
+        guard let url = URL(string: "\(Constants.youtubeUrl)/youtube/v3/search?q=\(query)&key=\(Constants.youtubeAPI)") else { return }
+        
+        let task = URLSession.shared.dataTask(with: url) { Data, _, error in
+            guard  error == nil ,let data = Data else { return }
+            
+            do{
+                let result = try JSONDecoder().decode(SearchListResponse.self, from: data)
+                completion(.success(result.items[0]))
+            }catch {
+                completion(.failure(error))
             }
         }
         task.resume()
