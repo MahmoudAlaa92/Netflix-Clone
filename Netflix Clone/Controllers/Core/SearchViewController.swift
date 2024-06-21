@@ -17,9 +17,11 @@ class SearchViewController: UIViewController {
         return table
     }()
     
-    private let searchResult: UISearchController = {
+    private var searchResult: UISearchController = {
         let search = UISearchController(searchResultsController: SearchResultViewController())
         search.searchBar.placeholder = "Search For a Movies"
+        search.searchBar.searchTextField.layer.cornerRadius = 15
+        search.searchBar.searchTextField.layer.masksToBounds = true
         return search
     }()
     
@@ -39,6 +41,8 @@ class SearchViewController: UIViewController {
         searchTableView.delegate = self
         searchTableView.dataSource = self
         fetchDataSearchTable()
+        
+        searchResult.searchResultsUpdater = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -47,7 +51,7 @@ class SearchViewController: UIViewController {
     }
     
     func fetchDataSearchTable(){
-        CallApi.shared.getSearch { result in
+        CallApi.shared.getDiscoverMovies { result in
             switch result {
             case .success(let titles):
                 self.titles = titles
@@ -82,4 +86,27 @@ extension SearchViewController: UITableViewDelegate ,UITableViewDataSource{
         
         return view.frame.size.height/5
     }
+}
+
+extension SearchViewController: UISearchResultsUpdating{
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchResult.searchBar
+        guard let query = searchBar.text
+                ,query.trimmingCharacters(in: .whitespaces).count > 2 ,let resultController = searchResult.searchResultsController as? SearchResultViewController else {
+            return
+        }
+        
+        CallApi.shared.search(query: query) { result in
+            switch result {
+            case .success(let titles):
+                DispatchQueue.main.async {
+                    resultController.titles = titles
+                    resultController.resultView.reloadData()
+                }
+            case .failure(let error):
+                print("Error in searchAPI Caller (search query): \(error)")
+            }
+        }
+    }
+    
 }
