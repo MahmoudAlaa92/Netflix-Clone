@@ -7,10 +7,11 @@
 
 import UIKit
 
+
 class HeaderUIView: UIView {
- 
+    
     private let HeaderImage: UIImageView = {
-       let image = UIImageView()
+        let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.image = UIImage(named: "HomeHeaderImage")
         image.clipsToBounds = true
@@ -18,7 +19,7 @@ class HeaderUIView: UIView {
     }()
     
     private let playButton: UIButton = {
-       let playButton = UIButton()
+        let playButton = UIButton()
         
         playButton.setTitle("Play", for: .normal)
         playButton.layer.cornerRadius = 6
@@ -29,7 +30,7 @@ class HeaderUIView: UIView {
     }()
     
     private let downloudButton = {
-       let playButton = UIButton()
+        let playButton = UIButton()
         playButton.setTitle("Downloud", for: .normal)
         playButton.layer.cornerRadius = 6
         playButton.layer.borderWidth = 1
@@ -47,7 +48,19 @@ class HeaderUIView: UIView {
         ]
         layer.addSublayer(gradientLayer)
     }
-
+    
+    func configure(with model: String) {
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(model ?? "")") else {
+            print("Error 404")
+            return
+        }
+        HeaderImage.sd_setImage(with: url, completed: nil)
+    }
+    
+    public func changeImageOfHeader(with model: [Titles]){
+        
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(HeaderImage)
@@ -63,10 +76,10 @@ class HeaderUIView: UIView {
     
     func addconstrian(){
         let playButtonConstrian = [
-        playButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 95),
-        playButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
-        playButton.widthAnchor.constraint(equalToConstant: frame.width/4.5+10),
-        playButton.heightAnchor.constraint(equalToConstant: 30)
+            playButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 95),
+            playButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
+            playButton.widthAnchor.constraint(equalToConstant: frame.width/4.5+10),
+            playButton.heightAnchor.constraint(equalToConstant: 30)
         ]
         
         let downloudbuttonConstrian = [
@@ -74,7 +87,7 @@ class HeaderUIView: UIView {
             downloudButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
             downloudButton.widthAnchor.constraint(equalToConstant: frame.width/4.5+10),
             downloudButton.heightAnchor.constraint(equalToConstant: 30)
-        
+            
         ]
         
         NSLayoutConstraint.activate(playButtonConstrian)

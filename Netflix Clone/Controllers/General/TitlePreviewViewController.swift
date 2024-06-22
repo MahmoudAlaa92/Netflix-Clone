@@ -24,7 +24,6 @@ class TitlePreviewViewController: UIViewController {
         label.numberOfLines = 0;
         label.font = .systemFont(ofSize: 20, weight: .bold)
         label.textColor = .white
-        label.text = "Harry Potter"
         
         return label
     }()
@@ -35,7 +34,6 @@ class TitlePreviewViewController: UIViewController {
         label.numberOfLines = 0;
         label.font = .systemFont(ofSize: 18, weight: .regular)
         label.textColor = .white
-        label.text = "This is one of the best movei for my self"
         
         return label
     }()
@@ -75,13 +73,13 @@ class TitlePreviewViewController: UIViewController {
         
         let titleViewConstrain = [
             titleView.leadingAnchor.constraint(equalTo: view.leadingAnchor ,constant: 20),
-            titleView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20),
+            titleView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             titleView.topAnchor.constraint(equalTo: webView.bottomAnchor, constant: 20),
         ]
         
         let overViewConstrain = [
             overView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            overView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20),
+            overView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             overView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 20),
         ]
         
@@ -102,25 +100,10 @@ class TitlePreviewViewController: UIViewController {
         titleView.text = data.title
         overView.text = data.titlOverView
         
-        guard let url = URL(string: "https://www.youtube.com/watch?v=\(data.youtubeView.id.videoId ?? "")") else{
-            print("Error when Convert URL For WebPreview")
+        guard let url = URL(string: "https://www.youtube.com/embed/\(data.youtubeView.id.videoId ?? "")") else{
+            print("Error when Convert URL For webView")
             return
         }
         webView.load(URLRequest(url: url))
     }
 }
-
-//extension TitlePreviewViewController: DataSharingDelegate{
-//    func didRecieveData(_ data: TitlePreviewModel) {
-//        titleView.text = data.title
-//        overView.text = data.titlOverView
-//        
-//        guard let url = URL(string: "https://www.youtube.com/watch?v=\(data.youtubeView.id.videoId ?? "")") else{
-//            print("Error when Convert URL For WebPreview")
-//            return
-//        }
-//        webView.load(URLRequest(url: url))
-//        
-//        
-//    }
-//}

@@ -16,6 +16,8 @@ enum Section: Int{
 }
 
 class HomeViewController: UIViewController {
+    private var headeView: HeaderUIView?
+    private var titles: [Titles]?
     
     let titleSection: [String] = ["Trending Movies" ,"Trending TV" ,"Popular" ,"Up Movies" ,"Top Rated"]
     
@@ -26,7 +28,7 @@ class HomeViewController: UIViewController {
         return table
     }()
     
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
@@ -36,11 +38,27 @@ class HomeViewController: UIViewController {
         
         configerNavbar()
         
-        let headeView = HeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 435))
+        headeView = HeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 435))
         homeFeedTable.tableHeaderView = headeView
-        
+        configureHeroHeaderView()
+        //        configerHeaderView()
     }
     
+    private func configureHeroHeaderView() {
+           CallApi.shared.getTrendingMovies {[weak self] result in
+               switch result {
+               case .success(let titles):
+                   self?.titles = titles
+                   let selctedTitle = titles.randomElement()
+                   DispatchQueue.main.async {
+                       self?.headeView?.configure(with: selctedTitle?.poster_path ?? "")
+                   }
+               case .failure(let error):
+                   print(error.localizedDescription)
+               }
+           }
+       }
+   
     func configerNavbar(){
         
         var image = UIImage(named: "netflixLogo")

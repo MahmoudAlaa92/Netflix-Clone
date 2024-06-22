@@ -85,11 +85,10 @@ extension CollectionViewTableViewCell: UICollectionViewDataSource ,UICollectionV
 
         CallApi.shared.getMovies(query: titleName + " trailer") { [weak self] result in
             switch result {
+                
             case .success(let Answer):
-//                print(Answer.id.videoId)
-                 // VideoElement(id: Netflix_Clone.SearchResultID(kind: Optional("youtube#video"), videoId: Optional("ss2KvK-w6w8")))
                 guard let videoID =  Answer.id.videoId else{ return }
-                guard let strongSelf = self else { return }
+                
                 self?.delegate?.didRecieveData(TitlePreviewModel(title: titleName, titlOverView: title.overview ?? "", youtubeView: Answer))
                 
             case .failure(let error):
