@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol DataSharingDelegate: AnyObject {
+    func didRecieveData(_ data: TitlePreviewModel)
+}
+
 class CollectionViewTableViewCell: UITableViewCell {
 
+    weak var delegate: DataSharingDelegate?
+    
     static let identifier = "CollectionViewTableViewCell"
     private var titles: [Titles] = [Titles]()
     
@@ -68,5 +74,28 @@ extension CollectionViewTableViewCell: UICollectionViewDataSource ,UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return titles.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let title = titles[indexPath.row]
+        
+        guard let titleName = title.original_title ?? title.original_name else{
+            return
+        }
+
+        CallApi.shared.getMovies(query: titleName + " trailer") { [weak self] result in
+            switch result {
+            case .success(let Answer):
+//                print(Answer.id.videoId)
+                 // VideoElement(id: Netflix_Clone.SearchResultID(kind: Optional("youtube#video"), videoId: Optional("ss2KvK-w6w8")))
+                guard let videoID =  Answer.id.videoId else{ return }
+                guard let strongSelf = self else { return }
+                self?.delegate?.didRecieveData(TitlePreviewModel(title: titleName, titlOverView: title.overview ?? "", youtubeView: Answer))
+                
+            case .failure(let error):
+                print(error)
+            }
+            
+        }
     }
 }

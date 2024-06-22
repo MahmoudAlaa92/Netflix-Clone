@@ -177,7 +177,7 @@ class CallApi{
         task.resume()
     }
     
-    func getMovies(query: String ,completion: @escaping (Result<SearchResult ,Error>)->Void ){
+    func getMovies(query: String ,completion: @escaping (Result<VideoElement ,Error>) -> Void){
         
         guard let url = URL(string: "\(Constants.youtubeUrl)/youtube/v3/search?q=\(query)&key=\(Constants.youtubeAPI)") else { return }
         

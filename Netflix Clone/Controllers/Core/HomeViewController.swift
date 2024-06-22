@@ -38,6 +38,7 @@ class HomeViewController: UIViewController {
         
         let headeView = HeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 435))
         homeFeedTable.tableHeaderView = headeView
+        
     }
     
     func configerNavbar(){
@@ -70,7 +71,6 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.transform = .init(translationX: 0, y: -offset)
     }
     
-    
 }
 
 extension HomeViewController: UITableViewDelegate ,UITableViewDataSource{
@@ -87,7 +87,7 @@ extension HomeViewController: UITableViewDelegate ,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        guard let header = view as? UITableViewHeaderFooterView else {return}
+        guard let header = view as? UITableViewHeaderFooterView else { return }
         header.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         header.textLabel?.frame = CGRect(x: header.bounds.origin.x+20, y: header.bounds.origin.y, width: 100, height: header.bounds.height)
         header.textLabel?.textColor = .white
@@ -100,50 +100,53 @@ extension HomeViewController: UITableViewDelegate ,UITableViewDataSource{
             return UITableViewCell()
         }
         
+        //Boss Class
+        cell.delegate = self
+        
         switch indexPath.section{
-            case Section.TrendingMovies.rawValue:
+        case Section.TrendingMovies.rawValue:
             CallApi.shared.getTrendingMovies { result in
                 switch result{
-                    case .success(let title):
-                        cell.itemsOfTitles(with: title)
-                    case .failure(let error):
-                        print(error)
+                case .success(let title):
+                    cell.itemsOfTitles(with: title)
+                case .failure(let error):
+                    print(error)
                 }
             }
         case Section.TrendingTv.rawValue:
             CallApi.shared.getTrendingTv { result in
                 switch result{
-                    case .success(let title):
-                        cell.itemsOfTitles(with: title)
-                    case .failure(let error):
-                        print(error)
+                case .success(let title):
+                    cell.itemsOfTitles(with: title)
+                case .failure(let error):
+                    print(error)
                 }
             }
         case Section.Popular.rawValue:
             CallApi.shared.getPopular { result in
                 switch result{
-                    case .success(let title):
-                        cell.itemsOfTitles(with: title)
-                    case .failure(let error):
-                        print(error)
+                case .success(let title):
+                    cell.itemsOfTitles(with: title)
+                case .failure(let error):
+                    print(error)
                 }
             }
         case Section.UpMovies.rawValue:
             CallApi.shared.upComingMovies { result in
                 switch result{
-                    case .success(let title):
-                        cell.itemsOfTitles(with: title)
-                    case .failure(let error):
-                        print(error)
+                case .success(let title):
+                    cell.itemsOfTitles(with: title)
+                case .failure(let error):
+                    print(error)
                 }
             }
         case Section.TopRated.rawValue:
             CallApi.shared.getTopRated { result in
                 switch result{
-                    case .success(let title):
-                        cell.itemsOfTitles(with: title)
-                    case .failure(let error):
-                        print(error)
+                case .success(let title):
+                    cell.itemsOfTitles(with: title)
+                case .failure(let error):
+                    print(error)
                 }
             }
         default:
@@ -157,5 +160,17 @@ extension HomeViewController: UITableViewDelegate ,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 20
+    }
+    
+}
+
+extension HomeViewController: DataSharingDelegate{
+    
+    func didRecieveData(_ data: TitlePreviewModel) {
+        DispatchQueue.main.async { [weak self] in
+            let vc = TitlePreviewViewController()
+            vc.didRecieveData(data)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }

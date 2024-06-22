@@ -8,10 +8,10 @@
 import Foundation
 
 struct SearchListResponse: Codable {
-    let items: [SearchResult]
+    let items: [VideoElement]
    
 }
-struct SearchResult: Codable {
+struct VideoElement: Codable {
     let id: SearchResultID
 }
 struct SearchResultID: Codable {
