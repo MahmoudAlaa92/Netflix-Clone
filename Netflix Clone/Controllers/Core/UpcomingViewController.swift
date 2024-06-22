@@ -10,7 +10,7 @@ import UIKit
 class UpcomingViewController: UIViewController {
     
     private var titles: [Titles] = [Titles]()
-
+    
     private let upComingMoviesTable: UITableView = {
         let table = UITableView();
         table.register(UpComingTableViewCell.self, forCellReuseIdentifier: UpComingTableViewCell.identifier)
@@ -20,7 +20,7 @@ class UpcomingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .systemBackground
         title = "UP Coming"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -72,5 +72,26 @@ extension UpcomingViewController: UITableViewDelegate ,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return view.frame.size.height/5
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dismiss(animated: true, completion: nil)
+        let title = titles[indexPath.row]
+        CallApi.shared.getMovies(query: title.original_title ?? "") { [weak self]result in
+            switch result {
+            case .success(let videoElement):
+                DispatchQueue.main.async {
+                    let vc = TitlePreviewViewController()
+                    vc.didRecieveData(
+                        TitlePreviewModel(title: title.original_title ?? "",
+                                          titlOverView: title.overview ?? "",
+                                          youtubeView: videoElement))
+                    
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
