@@ -74,9 +74,9 @@ extension UpcomingViewController: UITableViewDelegate ,UITableViewDataSource{
         return view.frame.size.height/5
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        dismiss(animated: true, completion: nil)
+        tableView.deselectRow(at: indexPath, animated: true)
         let title = titles[indexPath.row]
-        CallApi.shared.getMovies(query: title.original_title ?? "") { [weak self]result in
+        CallApi.shared.getMovies(query: title.original_title ?? "") { [weak self] result in
             switch result {
             case .success(let videoElement):
                 DispatchQueue.main.async {

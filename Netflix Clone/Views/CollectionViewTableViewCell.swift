@@ -87,8 +87,6 @@ extension CollectionViewTableViewCell: UICollectionViewDataSource ,UICollectionV
             switch result {
                 
             case .success(let Answer):
-                guard let videoID =  Answer.id.videoId else{ return }
-                
                 self?.delegate?.didRecieveData(TitlePreviewModel(title: titleName, titlOverView: title.overview ?? "", youtubeView: Answer))
                 
             case .failure(let error):
@@ -96,5 +94,26 @@ extension CollectionViewTableViewCell: UICollectionViewDataSource ,UICollectionV
             }
             
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
+        let config = UIContextMenuConfiguration(
+            identifier: nil,
+            previewProvider: nil) { _ in
+                let downloudAction = UIAction(
+                    title: "Downloud",
+                    image: nil,
+                    identifier: nil,
+                    discoverabilityTitle: nil,
+                    state: .off) { _ in
+                        print("Downloud")
+                    }
+                return UIMenu(
+                    title: "",
+                    image: nil,
+                    identifier: nil,
+                    children: [downloudAction])
+            }
+        return config
     }
 }

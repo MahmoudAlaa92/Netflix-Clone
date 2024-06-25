@@ -9,7 +9,7 @@ import UIKit
 
 class SearchViewController: UIViewController {
     private var titles: [Titles] = [Titles]()
-
+    
     private let searchTableView: UITableView = {
         let table = UITableView();
         table.register(UpComingTableViewCell.self, forCellReuseIdentifier: UpComingTableViewCell.identifier)
@@ -27,7 +27,7 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .systemBackground
         title = "Search"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -86,16 +86,49 @@ extension SearchViewController: UITableViewDelegate ,UITableViewDataSource{
         
         return view.frame.size.height/5
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let title = titles[indexPath.row]
+        CallApi.shared.getMovies(query: title.original_title ?? "") { [weak self] result in
+            switch result {
+            case .success(let videoElement):
+                DispatchQueue.main.async {
+                    let vc = TitlePreviewViewController()
+                    vc.didRecieveData(
+                        TitlePreviewModel(title: title.original_title ?? "",
+                                          titlOverView: title.overview ?? "",
+                                          youtubeView: videoElement))
+                    
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
 
-extension SearchViewController: UISearchResultsUpdating{
+extension SearchViewController: UISearchResultsUpdating ,SearchResultViewControllerDelegate{
+    func SearchResultViewControllerDelgate(_ view: TitlePreviewModel) {
+       
+        
+        DispatchQueue.main.async { [weak self] in
+            let vc = TitlePreviewViewController()
+            vc.didRecieveData(TitlePreviewModel(title: view.title, titlOverView: view.titlOverView, youtubeView: view.youtubeView))
+            
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchResult.searchBar
         guard let query = searchBar.text
                 ,query.trimmingCharacters(in: .whitespaces).count > 2 ,let resultController = searchResult.searchResultsController as? SearchResultViewController else {
             return
         }
-        
+        resultController.delegate = self
         CallApi.shared.search(query: query) { result in
             switch result {
             case .success(let titles):
@@ -107,5 +140,6 @@ extension SearchViewController: UISearchResultsUpdating{
                 print("Error in searchAPI Caller (search query): \(error)")
             }
         }
+
     }
 }

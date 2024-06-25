@@ -237,8 +237,8 @@
 		1591E1F42C1A68AA008259DB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				157AA71E2C23E91A0076BEFC /* Core */,
 				157AA71F2C23E92A0076BEFC /* General */,
+				157AA71E2C23E91A0076BEFC /* Core */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

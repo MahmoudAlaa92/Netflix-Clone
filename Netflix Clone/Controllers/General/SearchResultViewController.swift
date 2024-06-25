@@ -6,8 +6,12 @@
 //
 
 import UIKit
-
+protocol SearchResultViewControllerDelegate: AnyObject {
+    func SearchResultViewControllerDelgate (_ view: TitlePreviewModel)
+}
 class SearchResultViewController: UIViewController{
+    
+    weak var delegate: SearchResultViewControllerDelegate?
     
     public var titles:[Titles] = [Titles]()
     
@@ -51,5 +55,22 @@ extension SearchResultViewController: UICollectionViewDelegate ,UICollectionView
         let title = titles[indexPath.row]
         cell.itemsOfTitles(with: title.poster_path ?? "unknown")
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let title = titles[indexPath.row]
+        
+        CallApi.shared.getMovies(query: title.original_title ?? title.original_name ?? "") { result in
+            switch result {
+            case .success(let videoElement):
+                self.delegate?.SearchResultViewControllerDelgate(TitlePreviewModel(
+                    title: title.original_title ?? "",
+                    titlOverView: title.overview ?? "",
+                    youtubeView: videoElement))
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }

@@ -41,7 +41,6 @@ class HomeViewController: UIViewController {
         headeView = HeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 435))
         homeFeedTable.tableHeaderView = headeView
         configureHeroHeaderView()
-        //        configerHeaderView()
     }
     
     private func configureHeroHeaderView() {
