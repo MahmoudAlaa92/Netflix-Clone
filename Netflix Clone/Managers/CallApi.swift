@@ -32,7 +32,6 @@ class CallApi{
                 print("Error: \(error!.localizedDescription)")
                 return
             }
-            //            closure(data)
             
             do{
                 let result =  try JSONDecoder().decode(TrendingTitles.self ,from: data)

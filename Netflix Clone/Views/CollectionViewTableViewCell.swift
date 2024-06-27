@@ -54,9 +54,24 @@ class CollectionViewTableViewCell: UITableViewCell {
            self?.collectionView.reloadData()
        }
     }
+    
+//        saveDataToDownloudPage
+    private func downloudTitleAt (indexPath: IndexPath){
+        DataPersistentManager.shared.creatData(with: titles[indexPath.row]) { [weak self] result in
+            switch result {
+            case .success():
+                print("dataSaved")
+                DispatchQueue.main.async{
+                    self?.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 
-extension CollectionViewTableViewCell: UICollectionViewDataSource ,UICollectionViewDelegate{
+extension CollectionViewTableViewCell: UICollectionViewDataSource ,UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
        // green squere
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TitleCollectionViewCell.identifier, for: indexPath) as? TitleCollectionViewCell else{
@@ -96,7 +111,7 @@ extension CollectionViewTableViewCell: UICollectionViewDataSource ,UICollectionV
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let config = UIContextMenuConfiguration(
             identifier: nil,
             previewProvider: nil) { _ in
@@ -106,7 +121,7 @@ extension CollectionViewTableViewCell: UICollectionViewDataSource ,UICollectionV
                     identifier: nil,
                     discoverabilityTitle: nil,
                     state: .off) { _ in
-                        print("Downloud")
+                        self.downloudTitleAt(indexPath: indexPath)
                     }
                 return UIMenu(
                     title: "",

@@ -34,6 +34,7 @@
 		15AD23DF2C1FC6AD0043C11C /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AD23DE2C1FC6AD0043C11C /* Title.swift */; };
 		15BB14452C22530B00DDC48C /* UpComingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BB14442C22530B00DDC48C /* UpComingTableViewCell.swift */; };
 		15BB14492C2258AD00DDC48C /* TitleViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BB14482C2258AD00DDC48C /* TitleViewCell.swift */; };
+		15C1891D2C2D4BCB00A70E81 /* DataPersistentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C1891C2C2D4BCB00A70E81 /* DataPersistentManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		15AD23DE2C1FC6AD0043C11C /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
 		15BB14442C22530B00DDC48C /* UpComingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpComingTableViewCell.swift; sourceTree = "<group>"; };
 		15BB14482C2258AD00DDC48C /* TitleViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewCell.swift; sourceTree = "<group>"; };
+		15C1891C2C2D4BCB00A70E81 /* DataPersistentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistentManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				15AD23DC2C1FB1800043C11C /* CallApi.swift */,
+				15C1891C2C2D4BCB00A70E81 /* DataPersistentManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				15BB14452C22530B00DDC48C /* UpComingTableViewCell.swift in Sources */,
 				15AD23DD2C1FB1800043C11C /* CallApi.swift in Sources */,
 				1555F29B2C2102A800C4131D /* TitleCollectionViewCell.swift in Sources */,
+				15C1891D2C2D4BCB00A70E81 /* DataPersistentManager.swift in Sources */,
 				159AC3852C2649BF00BF1956 /* TitlePreviewViewController.swift in Sources */,
 				1544A7C92C1A332600C399A5 /* Netflix_Clone.xcdatamodeld in Sources */,
 				159AC3872C26551500BF1956 /* TitlePreviewModel.swift in Sources */,

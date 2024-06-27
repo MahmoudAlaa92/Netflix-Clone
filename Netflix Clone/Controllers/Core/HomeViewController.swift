@@ -73,7 +73,6 @@ class HomeViewController: UIViewController {
             UIBarButtonItem(image: UIImage(systemName: "person"), style: .done, target: self, action: nil),
             UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .done, target: self, action: nil)
         ]
-        
         navigationController?.navigationBar.tintColor = .white
     }
     
@@ -93,10 +92,10 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDelegate ,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return titleSection.count
+         titleSection.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+         1
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
