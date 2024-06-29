@@ -57,13 +57,10 @@ class CollectionViewTableViewCell: UITableViewCell {
     
 //        saveDataToDownloudPage
     private func downloudTitleAt (indexPath: IndexPath){
-        DataPersistentManager.shared.creatData(with: titles[indexPath.row]) { [weak self] result in
+        DataPersistentManager.shared.creatData(with: titles[indexPath.row]) { result in
             switch result {
             case .success():
-                print("dataSaved")
-                DispatchQueue.main.async{
-                    self?.collectionView.reloadData()
-                }
+                NotificationCenter.default.post(name: NSNotification.Name("Downlouded"), object: nil)
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -73,7 +70,7 @@ class CollectionViewTableViewCell: UITableViewCell {
 
 extension CollectionViewTableViewCell: UICollectionViewDataSource ,UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-       // green squere
+       
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TitleCollectionViewCell.identifier, for: indexPath) as? TitleCollectionViewCell else{
             print("Error when convert to titleCollectionViewCell")
             return UICollectionViewCell()

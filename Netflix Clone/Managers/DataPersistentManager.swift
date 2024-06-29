@@ -8,10 +8,11 @@
 import UIKit
 import CoreData
 
-enum dataSave: Error{
+enum DataBase: Error{
     case failToSaveData
     case successToSaveData
     case failToFetchData
+    case failToDeleteData
 }
 
 class DataPersistentManager {
@@ -43,7 +44,7 @@ class DataPersistentManager {
             try managedContext.save()
             completion(.success(()))
         }catch{
-            completion(.failure(dataSave.failToSaveData))
+            completion(.failure(DataBase.failToSaveData))
         }
     }
     
@@ -59,9 +60,25 @@ class DataPersistentManager {
             let titleItem = try managedContext.fetch(fetchRequest)
             completion(.success(titleItem))
         }catch {
-            completion(.failure(dataSave.failToFetchData))
+            completion(.failure(DataBase.failToFetchData))
             print("Error: ")
         }
-        
     }
+    
+    func deleteData(with model: TitleItem, completion: @escaping (Result<Void ,Error>) -> Void){
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
+            return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        managedContext.delete(model)
+        
+        do{
+            try managedContext.save()
+            completion(.success(()))
+        }catch{
+            completion(.failure(DataBase.failToDeleteData))
+        }
+    }
+    
 }

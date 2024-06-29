@@ -8,11 +8,11 @@
 import UIKit
 
 class DownloudViewController: UIViewController {
-
+    
     var titleItem: [TitleItem] = [TitleItem]()
     
     private let downloudTableView: UITableView = {
-       let tableView = UITableView()
+        let tableView = UITableView()
         tableView.register(UpComingTableViewCell.self, forCellReuseIdentifier: UpComingTableViewCell.identifier)
         return tableView
     }()
@@ -28,11 +28,16 @@ class DownloudViewController: UIViewController {
         downloudTableView.delegate = self
         downloudTableView.dataSource = self
         fetchData()
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("Downlouded"), object: nil, queue: nil) { _ in
+            self.fetchData()
+        }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         downloudTableView.frame = view.bounds
+        
     }
     
     func fetchData(){
@@ -96,6 +101,25 @@ extension DownloudViewController: UITableViewDataSource ,UITableViewDelegate {
                 
             case .failure(let error):
                 print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        DataPersistentManager.shared.deleteData(with: titleItem[indexPath.row]) { [weak self] result in
+            switch editingStyle {
+            case .delete:
+                switch result {
+                case .success(()):
+                    print("deleted Completed")
+                    self?.titleItem.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            default:
+                break
             }
         }
     }
